@@ -126,8 +126,18 @@ const CGFloat default_iPadRatio = 4.0/3.0;
         
         for (NSLayoutConstraint *actualConstraint in aView.superview.constraints)
         {
-            if ( ((actualConstraint.firstItem == aView)&&(actualConstraint.secondItem == aView.superview))||
-                ((actualConstraint.secondItem == aView )&&(actualConstraint.firstItem == aView.superview)) )
+			BOOL match = NO;
+			if (@available(iOS 11.0, *)) {
+				match = (actualConstraint.firstItem == aView &&
+						 (actualConstraint.secondItem == aView.superview || actualConstraint.secondItem == aView.superview.safeAreaLayoutGuide)) ||
+				(actualConstraint.secondItem == aView &&
+				 (actualConstraint.firstItem == aView.superview || actualConstraint.firstItem == aView.superview.safeAreaLayoutGuide));
+			} else {
+				match = (actualConstraint.firstItem == aView && actualConstraint.secondItem == aView.superview) ||
+					(actualConstraint.secondItem == aView && actualConstraint.firstItem == aView.superview);
+			}
+			
+            if (match)
             {
                 // In this case, this constraintint is only aspectRatioConstrain
                 if ( (attribute == actualConstraint.firstAttribute)&&
