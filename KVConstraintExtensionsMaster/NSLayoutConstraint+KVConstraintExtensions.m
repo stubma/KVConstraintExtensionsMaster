@@ -156,7 +156,8 @@ const CGFloat default_iPadRatio = 4.0/3.0;
 
 - (BOOL)isEqualToConstraint:(NSLayoutConstraint *)aConstraint
 {
-    if (self.firstItem == aConstraint.firstItem &&
+    if (self.class == aConstraint.class &&
+        self.firstItem == aConstraint.firstItem &&
         self.firstAttribute == aConstraint.firstAttribute &&
         self.relation == aConstraint.relation &&
         self.secondItem == aConstraint.secondItem &&
