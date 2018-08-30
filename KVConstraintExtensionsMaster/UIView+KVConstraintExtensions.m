@@ -361,7 +361,7 @@
 }
 
 - (void)applySizeConstraint:(CGSize)size {
-    [self applyHeightConstraint:size.width];
+    [self applyWidthConstraint:size.width];
     [self applyHeightConstraint:size.height];
 }
 
